@@ -8,7 +8,10 @@ public class Archer : NormalUnit
         audioManager.PlaySFX(audioManager.arrowHitBlood);
         uiController.setTargetUnit(targetUnit);
         ResetTilesToBlack();
+        
+        
         yield return new WaitForSeconds(0.5f);
+        SpawnHitEffect(targetUnit);
         uiController.dealDamage(attackDamage);
     }
 }

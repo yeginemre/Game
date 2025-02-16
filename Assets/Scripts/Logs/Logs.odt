@@ -792,3 +792,47 @@ Notes:
 - Plan for implementing particle systems
 
 =====================================
+
+Date: 2025-02-16
+Time Spent: 3 hours
+Type: Implementation
+///////////////////////////// ADD BLOOD VFX VIDEO HERE /////////////////////////////
+
+Current Focus:
+- Implemented blood visual effect system
+- Created custom VFX Graph for combat feedback
+- Integrated directional blood splatter
+
+Technical Details:
+- Developed blood VFX system using VFX Graph:
+  * Particle burst configuration:
+    - Velocity based on attacker-to-target direction
+    - Gravity-affected trajectory
+  * Particle properties:
+    - Custom unlit shader for consistent visibility
+    - Alpha blending for smooth fade
+    - Blood stays at ground for a while
+  
+- Created custom shader in Shader Graph:
+  * Unlit material to ignore scene lighting
+  * Transparent surface type for proper blending
+  * Metallic workflow mode for blood material look
+  * Alpha blending mode for fade effect
+
+- Integration with combat system:
+  * Blood direction calculated from attacker position
+  * Spawn point offset slightly above target unit
+  * VFX triggered during ExecuteAttack sequence
+  * Proper cleanup of particle systems
+
+Next Steps:
+- Add different VFX variations for different attack types
+- Implement hit impact effects
+- Consider adding screen shake for powerful attacks
+
+Notes:
+- Current particle count provides good visual feedback
+- System performs well with multiple simultaneous effects
+- May need optimization for large-scale battles
+
+=====================================

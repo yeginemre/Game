@@ -8,7 +8,10 @@ public class Warrior : NormalUnit
         audioManager.PlaySFX(audioManager.swordHitBlood);
         uiController.setTargetUnit(targetUnit);
         ResetTilesToBlack();
+        
+        
         yield return new WaitForSeconds(0.2f);
+        SpawnHitEffect(targetUnit);
         uiController.dealDamage(attackDamage);
     }
 }

@@ -117,6 +117,7 @@ MonoBehaviour:
   uiController: {fileID: 0}
   mainRenderer: {fileID: 2354066282781019399}
   uiRenderer: {fileID: 5855987048960448770}
+  hitEffectPrefab: {fileID: 6696432355206479550, guid: d2a4429751968dd4b8f7d2a5fa8ca870, type: 3}
 --- !u!23 &5855987048960448770 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7918335002988649766, guid: e25a8dd5fe96fbc4688c6f161ef91d08, type: 3}

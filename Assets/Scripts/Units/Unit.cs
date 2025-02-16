@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using UnityEngine.VFX;
 
 public abstract class Unit : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public abstract class Unit : MonoBehaviour
     [Header("References")]
     [SerializeField] protected MeshRenderer mainRenderer;
     [SerializeField] protected MeshRenderer uiRenderer;
+
+    [SerializeField] protected GameObject hitEffectPrefab;
 
     private void Awake()
     {
@@ -367,4 +370,28 @@ public abstract class Unit : MonoBehaviour
     }
 
     protected abstract IEnumerator ExecuteAttack(GameObject targetUnit);
+
+    protected void SpawnHitEffect(GameObject targetUnit)
+    {
+        if (hitEffectPrefab != null)
+        {
+            // Calculate spawn position with height offset
+            Vector3 spawnPosition = targetUnit.transform.position;
+            spawnPosition.y += 1f; // Adjust this value to change the height offset
+            
+            // Spawn VFX at target position with offset
+            GameObject hitEffect = Instantiate(hitEffectPrefab, spawnPosition, Quaternion.identity);
+            
+            // Get the Visual Effect component and set the direction
+            VisualEffect vfx = hitEffect.GetComponent<VisualEffect>();
+            if (vfx != null)
+            {
+                // Calculate direction from this unit to the target
+                Vector3 direction = (targetUnit.transform.position - transform.position).normalized;
+                vfx.SetVector3("direction", direction);
+            }
+            
+            Destroy(hitEffect, 2f); // Cleanup VFX after 2 seconds
+        }
+    }
 } 
