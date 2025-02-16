@@ -1,0 +1,794 @@
+SPARTACUS - DEVELOPMENT LOG
+==========================
+
+GAME OVERVIEW
+------------
+Game Name: Spartacus
+Genre: Strategy Card Game with Hex-Grid Combat
+Start Date: February 9, 2025
+Development Stage: Pre-production
+Engine/Tools: [To be determined]
+
+PROJECT GOALS
+------------
+- Create a strategic hex-grid based gladiator combat game
+- Implement deep hero and unit card mechanics
+- Develop engaging progression and economy systems
+
+CORE MECHANICS
+-------------
+Grid System:
+- Hexagonal grid-based combat arena
+- Front and back row modifiers
+- Environmental challenges and hazards
+- Units displayed with square/rectangular splash art above hexagons
+- HP and armor values visible on grid
+
+Combat System:
+- When match starts, players place units in first row and move based on speed
+- Turn-based combat with speed/action points
+- Each action (attack, skill) costs 1 speed point, ultimates cost 2
+- Stack system: units build power when not used, leading to critical hits
+- Bleed mechanics
+- Heal adjacent units mechanics
+- Initial deployment: Players place units in first row and move based on speed
+- One card can be played during deployment
+- Random challenge events during turns (e.g., "Don't move for 2 turns to gain speed")
+
+Units & Heroes:
+- Each player has a deck with heroes (2) and normal units (5)
+- Two unit types: Common Units and Heroes
+- Unit stats: Strength, Defense, Range, Speed, HP, Armor
+- Position-based mechanics (front/back row bonuses)
+- Heroes have: Passive ability, Basic skill (cooldown), Ultimate (one-time use)
+- Hero defeat system:
+  * First down: Can be revived by normal units with moving revived unit 1 tile
+  * Second down: Only healable
+  * Third down or attacked while down: Death
+
+Card System:
+- Various card types (buffs, skills, gold cards)
+- Discard and destroy mechanics
+- One-time use faction skills
+- Challenge cards with special conditions
+- Cards unlock based on reputation and valor
+
+Progression Systems:
+- Valor system for heroes (lost when killing downed heroes)
+- Rival system for heroes
+- Reputation and title mechanics
+- Gold fees for hero usage
+- Betting system on matches (bet on own or others' matches)
+- Bribe mechanics for special objectives
+- Defeated enemy heroes join winner's collection
+- Hero pool system for defeated heroes
+- RNG drops or purchase system for new heroes
+
+Game Modes:
+- Duel mode with special commander orders
+- Arena challenges with unique conditions
+- Roguelike mode (potential feature)
+- Main hub with arena, market, upgrade area, leaderboard
+- Match rewards: Choice between heroes, normal units, or cards
+
+Arena Challenges:
+- Tiger spawns at edges
+- Spike traps emerging from ground/walls (with turn counters)
+- Row/column hazards
+- Shrinking arena
+- Challenge cards: movement restrictions, speed bonuses
+- Turn-based environmental effects
+
+PLANNED UNIT CLASSES
+-------------------
+Heroes:
+- Spearman
+  * Ultimate: Combines spears with 2 other units for massive throw attack
+  * Requires weapon retrieval after throw
+
+- Swordsman
+  * Ultimate: Rage mode (speed and attack buff)
+
+- Berserker
+  * Passive: Gains attack power when taking damage
+  * Skill: Double-edged sword (damages self and enemy)
+  * Ultimate: Sacrifice friendly unit for massive attack boost
+
+- Chariot Rider
+  * Passive: Drive-by damage when passing units (with cooldown)
+
+- Longbowman
+  * Passive: Distance-based damage scaling
+  * Ultimate: Coordinated shot with nearby archers
+
+- Chain Fighter
+  * Skill: Hook and pull enemies
+  * Mobility-focused combat
+
+- Knight
+  * Ultimate: Forces one-on-one duel with target
+
+- Holy Warrior
+  * Ultimate: Resurrection ability
+
+- General
+  * Ultimate: Spawn additional units
+
+- Assassin
+  * Skill: Linked dash attack (swap positions with partner to strike target)
+
+- Axe Warrior
+  * Ultimate: Whirlwind (damages all adjacent tiles)
+
+- Trap Master
+  * Skill: Set various traps on tiles
+
+- Ultimate Thief
+  * Skill: Steal enemy ultimate ability
+
+- Disable Specialist
+  * Skill: Disable enemy weapons/abilities
+
+- Tank
+  * Passive: Attack power scales with armor value
+
+Common Units:
+- Spearmen
+  * Skill: Throw spear (reduced range until retrieved)
+  * Spear sticks in target if armor not broken
+
+- Axemen
+  * Skill: Enhanced damage to edge tile targets
+
+- Invisible Units
+  * Stealth mechanics
+
+- Kamikaze Units
+  * Powerful self-destructive abilities
+
+- Charge Units
+  * Rush attack capabilities
+
+- Taunt Specialists
+  * Force target to attack them for 2 turns
+
+Special Mechanics:
+- 360-degree execution moves with multiple heroes
+- Weapon retrieval system
+- Forced friendly fire mechanics
+- Unit throwing abilities
+- Position swapping
+- Charge-up attacks (1 turn charge for enhanced damage)
+- Linked dash attacks(swap positions with partner to strike target between them)
+- Execute low-health targets (resets cooldown or enhances next attack)
+- Hero passive: Prevents enemy hero revival
+- Challenge cards with movement/position requirements
+- Armor-based attack scaling
+- Unit linking system for combo attacks
+
+NEXT STEPS
+----------
+1. Implement basic hex grid system
+2. Design core unit movement and combat mechanics
+3. Prototype hero ability system
+4. Develop card mechanics prototype
+
+Notes:
+- Consider balance between hero and unit interactions
+- Plan progression systems carefully
+- Design arena challenges to enhance strategic depth
+
+=====================================
+
+DEVELOPMENT LOG ENTRIES
+----------------------
+
+Date: 2025-02-09
+Time Spent: Initial Setup
+Type: Project Planning
+
+
+Current Focus:
+- Hexagonal tile map implementation
+
+Technical Requirements:
+- Need to research hexagonal grid systems
+- Investigate tile-based movement algorithms
+- Plan data structure for hex grid
+
+Next Steps:
+- Research hex grid implementation methods
+- Create basic prototype of hex map
+- Define basic grid properties (size, scale, orientation)
+
+Notes:
+- Consider flat-topped vs pointy-topped hexagons
+- Look into existing hex grid libraries/resources
+- Plan for future pathfinding implementation
+
+=====================================
+
+Date: 2025-02-09
+Time Spent: 1 hour
+Type: Implementation
+
+
+Current Focus:
+- Implemented mouse position tracking system
+
+Technical Details:
+- Created mathematical plane-based mouse position detection
+- Added visual debugging (green sphere at mouse position)
+- Optimized by avoiding physics-based raycasting
+
+Next Steps:
+- Implement hex tile detection
+
+=====================================
+
+Date: 2025-02-09
+Time Spent: 2 hours
+Type: Implementation
+
+
+Current Focus:
+- Implemented hexagon mouse detection system
+
+Technical Details:
+- Created Hex class to store hexagon vertex positions
+- Implemented mathematical approach for point-in-hexagon detection:
+  * Used dot product calculations for edge detection
+  * Checks if point is within hexagon bounds using corner vertices
+  * Visual feedback: green sphere when inside, red when outside
+- Avoided using physics colliders for better performance
+
+Next Steps:
+- Create hex grid generator
+- Implement hex selection system
+
+=====================================
+
+Date: 2025-02-09
+Time Spent: 3 hours
+Type: Implementation
+
+Current Focus:
+- Implemented hexagonal grid generation system
+
+Technical Details:
+- Created HexGrid class with the following features:
+  * Configurable grid size with odd-numbered center row
+  * Jagged array structure for hex storage
+  * Automatic hex positioning calculations:
+    - HEX_SIZE = 5f (horizontal distance between centers)
+    - Z_OFFSET = 3.75f (vertical offset between rows)
+    - X_STEP = 2.5f (x offset for non-center rows)
+  * Row-by-row generation starting from center
+  * Proper hex spacing and alignment
+  * Naming convention: Hex_Row_Column for easy debugging
+
+Challenges Overcome:
+- Solved offset calculation for non-center rows
+- Fixed alignment issues with hex prefab rotation
+- Optimized instantiation by using object parent
+
+Next Steps:
+- Implement hex highlighting system
+- Add visual feedback for hex selection
+
+Notes:
+- Consider adding hex coordinate system (axial or cubic)
+- May need to adjust spacing constants for different hex sizes
+- Plan for future pathfinding implementation
+
+=====================================
+
+Date: 2025-02-10
+Time Spent: 2 hours
+Type: Implementation
+///////////////////////////// ADD VIDEO HERE /////////////////////////////
+
+Current Focus:
+- Implemented mouse-to-hex detection system
+
+Technical Details:
+- Enhanced Update method in HexGrid class:
+  * Efficient hex detection without raycasts
+  * Two-step detection process:
+    1. Quick approximate location using math:
+       - Row estimation using Z position
+       - Column estimation using X position
+    2. Fine detection using nearest neighbor check:
+       - Checks 3x3 area around estimated position
+       - Uses distance comparison for accuracy
+  * Visual feedback system:
+    - White highlight for hovered hex
+    - Sorting order adjustment for depth
+    - Audio feedback on hover
+    - Mouse indicator color (green when over hex, red outside)
+
+Challenges Overcome:
+- Optimized detection without using expensive physics
+- Solved edge case issues with grid boundaries
+- Implemented smooth transition between hexes
+
+Next Steps:
+- Add hex selection system
+- Implement hex state management
+- Consider adding hover effects/animations
+
+Notes:
+- Current system performs well with medium grid sizes
+- May need optimization for larger grids
+- Consider adding hex data structure for game state
+
+=====================================
+
+Date: 2025-02-10
+Time Spent: 1 hour
+Type: Implementation
+///////////////////////////// ADD VIDEO HERE /////////////////////////////
+Current Focus:
+- Implemented smooth camera transition system
+
+Technical Details:
+- Created CameraController class with the following features:
+  * Two camera positions with smooth transitions:
+    - Initial View: (0, 15, -20) position, (40, 0, 0) rotation
+    - Top-Down View: (0, 20, 0) position, (90, 0, 0) rotation
+  * Toggle between views using 'C' key
+  * Smooth movement using Vector3.Lerp for position
+  * Smooth rotation using Quaternion.Lerp
+  * Configurable movement speed and rotation speed
+  * Auto-snap to exact coordinates when close enough
+
+Challenges Overcome:
+- Implemented smooth interpolation between positions
+- Added position/rotation snapping to prevent floating point imprecision
+- Created configurable fields for easy adjustment in Unity Inspector
+
+Next Steps:
+- Add camera zoom functionality
+- Consider adding more camera positions/angles
+- Implement camera bounds
+
+Notes:
+- Current transition speeds (5f) work well for the given distances
+- May need to adjust threshold values (0.01f) based on grid scale
+- Consider adding easing functions for more polished transitions
+
+=====================================
+
+Date: 2025-02-10
+Time Spent: 1 hour
+Type: Asset Creation
+
+Current Focus:
+- Created hexagon model with gladiator texture in Blender
+
+Technical Details:
+- Modeled basic hexagon mesh in Blender:
+  * Created flat-topped hexagon with proper proportions
+
+Next Steps:
+- Implement unit interaction with hex grid
+
+
+Notes:
+- Keep poly count low for performance optimization
+- May need different texture variations for special hexes
+- Consider adding vertex colors for state indication
+
+=====================================
+
+Date: 2025-02-11
+Time Spent: 2 hours
+Type: Implementation
+
+Current Focus:
+- Object mapping system
+- Unit spawn mechanism
+- Unit selection system
+
+Technical Details:
+- Created dictionary-based hex-to-unit mapping system
+- Implemented unit selection through tile clicking
+- Added visual feedback for selected units
+- Developed spawn system with automatic tile linking
+
+Next Steps:
+- Implement movement mechanics
+- Add more selection feedback options
+
+=====================================
+
+Date: 2025-02-11
+Time Spent: 2 hours
+Type: Implementation
+///////////////////////////// ADD VIDEO HERE /////////////////////////////
+Current Focus:
+- Adjacent tile detection
+- Movement mode implementation
+- Tile highlighting system
+
+Technical Details:
+- Created array-based adjacent tile detection
+- Implemented movement mode toggle with 'M' key
+- Added color-based tile highlighting
+- Automatic color reset system
+
+Difficulties Overcome:
+- Complex adjacency patterns in hex grid structure
+- Different behavior between top and bottom grid sections
+- Adapting array indices for hex-based layout
+
+Next Steps:
+- Optimize highlighting system
+- Implement movement validation
+
+=====================================
+
+Date: 2025-02-11
+Time Spent: 1 hour
+Type: Implementation
+
+Current Focus:
+- Tile hovering optimization
+- Color management system
+
+Technical Details:
+- Implemented conditional hover mode
+- Created event-based color update system
+- Developed intelligent color restoration
+
+Improvements:
+- Reduced unnecessary color updates
+- Fixed color restoration edge cases
+- Optimized hover detection
+- Better original color tracking
+
+Next Steps:
+- Implement unit movement system
+
+=====================================
+
+Date: 2025-02-12
+Time Spent: 2 hours
+Type: Implementation
+///////////////////////////// ADD VIDEO HERE /////////////////////////////
+
+Current Focus:
+- Implemented smooth unit movement system
+- Added movement sound effects
+- Refined unit-hex interaction
+
+Technical Details:
+- Created coroutine-based movement system:
+  * Smooth Lerp-based movement between hexes
+  * Configurable movement speed (currently 7f)
+  * Prevention of movement interruption
+  * Precise position snapping at destination
+- Enhanced hex-unit relationship management:
+  * Proper hex-to-unit mapping updates during movement
+  * Automatic index updating for unit position tracking
+  * Clean transition between movement states
+- Added audio feedback for movement
+- Implemented movement state tracking:
+  * isMoving: Controls movement mode
+  * moveTransitioning: Prevents movement interruption
+  * Proper state reset after movement completion
+
+Next Steps:
+- Implement movement range system (2-3 tiles)
+- Add path finding for longer distances
+- Add movement validation for different unit types
+- Prevent movement to occupied hexes
+
+Notes:
+- Current movement speed (7f) provides good balance
+- May need to implement movement queuing system
+- Plan for obstacle detection in longer movements
+
+=====================================
+
+Date: 2025-02-12
+Time Spent: 3 hours
+Type: Implementation
+
+Current Focus:
+- Implemented recursive adjacent tile detection
+- Added path tracking system
+- Created sequential movement system
+
+Technical Details:
+- Developed recursive tile highlighting system:
+  * FindAdjacentHexes method:
+    - Initial wave finds immediate adjacent hexes
+    - Subsequent waves expand based on unit's speed value
+    - Each hex stores reference to its "previous" hex in path
+    - Only highlights unoccupied and previously unhighlighted hexes
+  * Hex path tracking:
+    - Each highlighted hex stores reference to previous hex
+    - Creates implicit path back to starting position
+    - Implemented via Hex component's prev reference
+
+- Created sequential movement system:
+  * MoveSequence coroutine:
+    - Recursively moves unit through stored path
+    - Checks prev reference to determine next movement
+    - Waits for each movement to complete before continuing
+    - Uses moveTransitioning flag to prevent interruption
+  * Movement flow:
+    1. Start at target hex
+    2. Recursively move through prev references
+    3. Wait for each movement to complete
+    4. Clear prev references after movement
+    5. Reset movement state after full path completion
+
+
+Next Steps:
+- subclass system for different unit types
+
+Notes:
+- System effectively creates natural-looking unit movement
+- Current implementation supports variable unit speeds
+- Consider adding path preview functionality
+- May need optimization for large movement ranges
+
+=====================================
+
+Date: 2025-02-13
+Time Spent: 4 hours
+Type: Implementation
+
+Current Focus:
+- Unit movement restrictions and subclassing
+- Audios
+- Color management improvements
+- Bug fixes
+///////////////////////////// ADD first sub unit VIDEO HERE /////////////////////////////
+Technical Details:
+- Implemented remaining speed mechanic:
+  * Added remainingSpeed variable to track available moves
+  * Movement now consumes speed points
+  * Units cannot move when remainingSpeed reaches 0
+
+- Created Unit subclass system:
+  * Converted Unit class to abstract base class, and divided into 2 abstract subclasses: Normal and Hero
+  * Created first concrete unit: Warrior
+
+- Added sound effects
+
+- Improved tile color management:
+  * Implemented color priority system
+  * Color hierarchy:
+    1. Selection highlight (highest)
+    2. Movement range
+    4. Base color (lowest)
+
+- Bug Fixes:
+  * Prevented move mode activation during unit movement
+
+Next Steps:
+- Implement UI for units
+
+Notes:
+- Current speed system provides good balance
+- Consider adding visual indicator for remaining moves
+- Plan for unit ability implementations
+- May need optimization for color management with larger grids
+
+=====================================
+
+Date: 2025-02-13
+Time Spent: 3 hours
+Type: Implementation
+
+Current Focus:
+- UI system implementation
+- Visual improvements
+- HP mechanics
+///////////////////////////// ADD UI VIDEO HERE /////////////////////////////
+///////////////////////////// ADD BLENDER SCREENSHOT HERE /////////////////////////////
+Technical Details:
+- Enhanced unit and hex visuals:
+  * Increased hex and unit sizes for better visibility
+  * Updated unit materials with separated components in blender:
+    - Main texture panel for unit visuals
+    - UI part left to display stats there
+
+- Implemented HP UI system:
+  * Created HP text display system:
+    - Text elements dynamically created and attached to units
+    - Dictionary-based mapping between units and their UI elements
+    - Offset-based positioning relative to unit location
+    - Automatic position updates during unit movement
+  
+  * HP visualization features:
+    - Smooth HP decrease animation
+    - Color-coded HP status:
+      * High HP: Green
+      * Medium HP: Yellow
+      * Low HP: Red
+    - Configurable animation duration
+    - Precise HP tracking and updates
+
+Next Steps:
+- Implement damage numbers and mechanics
+- Add new unit types with different stats
+
+Notes:
+- Current smooth decrease duration (0.5s) provides good visual feedback
+- Consider adding particle effects for HP changes
+- May need optimization for multiple simultaneous HP updates
+
+=====================================
+
+Date: 2025-02-13
+Time Spent: 3 hours
+Type: Implementation
+///////////////////////////// ADD VIDEO HERE /////////////////////////////
+
+Current Focus:
+- New unit type implementation (Archer)
+- Camera system improvements
+- Asset optimization
+
+Technical Details:
+- Created Archer unit class:
+  * Implemented unique stats
+  * Added new sound effect for archer spawn
+
+- Optimized unit model structure:
+  * Restructured Blender model with 2 submeshes:
+    - Plane mesh for main unit texture
+    - Cylinder mesh for body
+  * Improved texture application workflow:
+    - Direct texture application to plane mesh
+    - Better material management
+  * Created prefab with proper child object references
+    - Successfully implemented inspector references to child components
+    - Improved component organization
+
+- Enhanced unit spawn system:
+  * Implemented flexible spawn handler for multiple unit types
+  * Added unit-specific initialization
+  * Integrated with existing hex grid system
+
+- Implemented comprehensive camera control system:
+  * WASD movement controls:
+    - Smooth horizontal movement
+    - Camera-relative direction
+    - Configurable movement speed
+  * Mouse scroll wheel zoom:
+    - Context-aware zoom behavior:
+      * Normal view: Forward/backward along camera angle
+      * Tactical view: Vertical up/down movement
+    - Zoom limits and speed controls
+  * Performance optimizations:
+    - Movement updates only during active input
+
+Next Steps:
+- Implement additional unit types
+- Damage System
+
+Notes:
+- Current camera movement speed provides good control
+- Prefab system working well for unit management
+- Consider adding camera position boundaries
+- Plan for additional unit variations
+
+=====================================
+
+Date: 2025-02-14
+Time Spent: 2 hours
+Type: Implementation
+
+Current Focus:
+- Enhanced tile detection flexibility
+- Attack mode implementation
+- Range-based tile highlighting
+
+Technical Details:
+- Improved FindAdjacentHexes system:
+  * Added color parameter for flexible highlighting:
+    - Allows different colors for different actions (blue for movement, red for attack)
+    - Supports future expansion for other action types
+  * Implemented configurable range parameter:
+    - Separate values for movement and attack ranges
+    - Range-based tile detection for different unit abilities
+  * Added unit detection toggle:
+    - Boolean parameter to control whether tiles with units are highlighted
+    - Movement mode ignores occupied tiles
+    - Attack mode specifically targets tiles with units
+
+- Implemented attack mode foundation:
+  * Added attack range property for units
+  * Created attack mode toggle with 'R' key
+  * Red highlighting for attack range tiles
+  * Unit detection within attack range
+
+Next Steps:
+- Implement damage system
+- Create unit-specific attack behaviors
+- Integrate with UI damage display
+
+Notes:
+- Current system provides good flexibility for different action types
+- Consider adding visual indicators for different modes
+- Plan for implementing various attack patterns
+- May need to add attack cooldown system
+
+=====================================
+
+Date: 2025-02-15
+Time Spent: 2 hours
+Type: Implementation
+///////////////////////////// ADD attack VIDEO HERE /////////////////////////////
+
+Current Focus:
+- Implemented unit attack system
+- Added unit-specific attack behaviors
+- Bug fixes
+
+Technical Details:
+- Created abstract attack system:
+  * Implemented IEnumerator-based ExecuteAttack method:
+    - Abstract method in base Unit class
+    - Overridden by each unit type
+    - Allows for unit-specific attack sequences
+
+- Unit-specific implementations:
+  * Warrior:
+    - Sword hit blood sound effect
+    - 0.2 second delay before damage
+  * Archer:
+    - Arrow hit blood sound effect
+    - 0.5 second delay before damage
+  * Delay system prepares for future animations
+
+- Bug Fixes:
+  * Fixed mode switching issues:
+    - Proper cleanup when switching between attack and move modes
+    - Reset tile colors when changing modes
+
+Next Steps:
+- Implement more unit types with unique attack patterns
+- Add visual effects for attacks
+- Looks like we need to switch to URP now, we will create the project from scratch...
+
+Notes:
+- Current delay times provide good feedback
+- System flexible enough for future unit additions
+
+=====================================
+
+Date: 2025-02-16
+Time Spent: 2 hours
+Type: Implementation
+
+Current Focus:
+- Project migration to Universal Render Pipeline (URP)
+- URP configuration optimization
+
+Technical Details:
+- Successfully migrated project to URP:
+  * Created new project with URP template
+  * Imported all existing assets and scripts
+  * Reconfigured materials for URP compatibility
+
+- Optimized URP settings:
+  * Adjusted shadow draw distance for better visibility
+  * Enabled 2x MSAA (Multi-Sample Anti-Aliasing):
+    - Improved visual quality
+    - Reduced jagged edges
+
+Next Steps:
+- Implement visual effects using URP features
+
+Notes:
+- URP provides better performance and visual features
+- Consider further graphics optimizations
+- Plan for implementing particle systems
+
+=====================================
